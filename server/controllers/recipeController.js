@@ -1,6 +1,7 @@
 require("../models/database");
 const Category = require("../models/Category");
 
+// --get / --
 exports.homepage = async (req, res) => {
   try{ 
     const limitNumber = 5;
@@ -10,6 +11,19 @@ exports.homepage = async (req, res) => {
     res.status(500).send({message: error.message || "Error Occcured"});
   }
 };
+
+
+// --get /categories--
+
+exports.exploreCategories = async(req, res)=>{
+  try{
+    const limitNumber = 20;
+    const categories = await Category.find({}).limit(limitNumber);
+    res.render("categories", {title: "Cooking Blog - Categories", categories});
+  } catch (error){
+    res.staus(500).send({message: error.message || "Error Occured" });
+  }
+}
 
 
 // --I have commented the below codes, as it will keep on adding the same data to the database--
