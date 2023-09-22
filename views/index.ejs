@@ -47,38 +47,16 @@
     </div>
 
     <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
-        <a href="/recipe/#" class="col text-center category__link">
-            <div class="category__img category__img--large shadow">
-                <img src="img/chocolate-banoffe-whoopie-pies.jpg" alt="Chocolate Banoffe" loading="lazy">
-            </div>
-            <div class="pt-1">Chocolate Banofee</div>
-        </a>
-
-        <!-- --just copy 5 more times-- -->
-        <a href="/recipe/#" class="col text-center category__link">
-            <div class="category__img category__img--large shadow">
-                <img src="img/chocolate-banoffe-whoopie-pies.jpg" alt="Chocolate Banoffe" loading="lazy">
-            </div>
-            <div class="pt-1">Chocolate Banofee</div>
-        </a>
-        <a href="/recipe/#" class="col text-center category__link">
-            <div class="category__img category__img--large shadow">
-                <img src="img/chocolate-banoffe-whoopie-pies.jpg" alt="Chocolate Banoffe" loading="lazy">
-            </div>
-            <div class="pt-1">Chocolate Banofee</div>
-        </a>
-        <a href="/recipe/#" class="col text-center category__link">
-            <div class="category__img category__img--large shadow">
-                <img src="img/chocolate-banoffe-whoopie-pies.jpg" alt="Chocolate Banoffe" loading="lazy">
-            </div>
-            <div class="pt-1">Chocolate Banofee</div>
-        </a>
-        <a href="/recipe/#" class="col text-center category__link">
-            <div class="category__img category__img--large shadow">
-                <img src="img/chocolate-banoffe-whoopie-pies.jpg" alt="Chocolate Banoffe" loading="lazy">
-            </div>
-            <div class="pt-1">Chocolate Banofee</div>
-        </a>
+        <% if(food != "") { %>
+            <% food.latest.forEach(function(recipe, index) { %>
+                <a href="/recipe/<%= recipe._id %>" class="col text-center category__link">
+                    <div class="category__img category__img--large shadow">
+                        <img src="upload/<%= recipe.image %>" alt="<%= recipe.name %>" loading="lazy">
+                    </div>
+                    <div class="pt-1"><%= recipe.name %></div>
+                </a>
+            <% }) %>
+        <% } %>
     </div>
 </section>
 <!-- --End-- -->
