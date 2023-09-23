@@ -23,9 +23,9 @@ exports.homepage = async (req, res) => {
     res.status(500).send({ message: error.message || "Error Occcured" });
   }
 };
+// --end--
 
 // --get /categories--
-
 exports.exploreCategories = async (req, res) => {
   try {
     const limitNumber = 20;
@@ -38,6 +38,19 @@ exports.exploreCategories = async (req, res) => {
     res.staus(500).send({ message: error.message || "Error Occured" });
   }
 };
+// --end--
+
+// --get /recipe/:id--
+exports.exploreRecipe = async (req, res)=>{
+  try{
+    const recipeId = req.params.id;
+    const recipe = await Recipe.findById(recipeId);
+    res.render("recipe", { title: "Cooking Blog - Recipe", recipe });
+  } catch(error){
+    res.render(500).send({message: error.message || "Error Ocuured"});
+  }
+}
+// --end--
 
 // --I have commented the below codes, as it will keep on adding the same data to the database--
 // async function insertDummyCategoryData() {
