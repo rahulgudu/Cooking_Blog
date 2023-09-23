@@ -9,9 +9,13 @@ exports.homepage = async (req, res) => {
     const categories = await Category.find({}).limit(limitNumber);
 
     const latest = await Recipe.find({}).sort({ _id: -1 }).limit(5); //This is only show the latest recipies in the homepage.
+
+    //the below code is to make indivisual section for each category 
     const thai = await Recipe.find({ category : "Thai" }).limit(5);
     const american = await Recipe.find({ category : "American" }).limit(5);
     const chinese = await Recipe.find({ category : "Chinese" }).limit(5);
+    //end
+
     const food = { latest, thai, american, chinese };
 
     res.render("index", { title: "Cooking Page:HomePage", categories, food });
