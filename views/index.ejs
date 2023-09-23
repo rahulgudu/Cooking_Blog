@@ -40,7 +40,7 @@
 <!-- --End-- -->
 
 <!-- --Latest Section-- -->
-<section class="pb-4pt-4">
+<section class="pb-4 pt-4">
     <div class="d-flex mb-2 align-items-center">
         <h2>Latest Recipes</h2>
         <a href="/explore-latest" class="ms-auto">View More</a>
@@ -56,6 +56,82 @@
                     <div class="pt-1"><%= recipe.name %></div>
                 </a>
             <% }) %>
+        <% } else { %>
+            <p>No Items Found</p>
+        <% } %>
+    </div>
+</section>
+<!-- --End-- -->
+
+
+<!-- --Thai Section-- -->
+<section class="pb-4 pt-4">
+    <div class="d-flex mb-2 align-items-center">
+        <h2>Thai Recipes</h2>
+        <a href="/categories/Thai" class="ms-auto">View More</a>
+    </div>
+
+    <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
+        <% if(food.thai != "") { %>
+            <% food.thai.forEach(function(recipe, index) { %>
+                <a href="/recipe/<%= recipe._id %>" class="col text-center category__link">
+                    <div class="category__img category__img--large shadow">
+                        <img src="upload/<%= recipe.image %>" alt="<%= recipe.name %>" loading="lazy">
+                    </div>
+                    <div class="pt-1"><%= recipe.name %></div>
+                </a>
+            <% }) %>
+        <% } else { %>
+            <p>No Items Found</p>
+        <% } %>
+    </div>
+</section>
+<!-- --End-- -->
+
+
+<!-- --American Section-- -->
+<section class="pb-4 pt-4">
+    <div class="d-flex mb-2 align-items-center">
+        <h2>American Recipes</h2>
+        <a href="/categories/American" class="ms-auto">View More</a>
+    </div>
+
+    <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
+        <% if(food.american != "") { %>
+            <% food.american.forEach(function(recipe, index) { %>
+                <a href="/recipe/<%= recipe._id %>" class="col text-center category__link">
+                    <div class="category__img category__img--large shadow">
+                        <img src="upload/<%= recipe.image %>" alt="<%= recipe.name %>" loading="lazy">
+                    </div>
+                    <div class="pt-1"><%= recipe.name %></div>
+                </a>
+            <% }) %>
+         <% } else { %>
+            <p>No Items Found</p>
+        <% } %>
+    </div>
+</section>
+<!-- --End-- -->
+
+<!-- --Chinese Section-- -->
+<section class="pb-4 pt-4">
+    <div class="d-flex mb-2 align-items-center">
+        <h2>Chinese Recipes</h2>
+        <a href="/categories/Chinese" class="ms-auto">View More</a>
+    </div>
+
+    <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
+        <% if(food.chinese != "") { %>
+            <% food.chinese.forEach(function(recipe, index) { %>
+                <a href="/recipe/<%= recipe._id %>" class="col text-center category__link">
+                    <div class="category__img category__img--large shadow">
+                        <img src="upload/<%= recipe.image %>" alt="<%= recipe.name %>" loading="lazy">
+                    </div>
+                    <div class="pt-1"><%= recipe.name %></div>
+                </a>
+            <% }) %>
+        <% } else { %>
+            <p>No Items Found</p>
         <% } %>
     </div>
 </section>
