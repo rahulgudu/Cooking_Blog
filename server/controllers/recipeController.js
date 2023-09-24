@@ -52,6 +52,28 @@ exports.exploreRecipe = async (req, res)=>{
 }
 // --end--
 
+// --get /categories/:id --
+exports.exploreCategoriesById = async (req, res) => {
+  try {
+
+    let categoryId = req.params.id;
+    const limitNumber = 20;
+    const categoryById = await Recipe.find({ 'category': categoryId }).limit(limitNumber);
+    res.render("categories", {
+      title: "Cooking Blog - Categories",
+      categoryById,
+    });
+  } catch (error) {
+    res.staus(500).send({ message: error.message || "Error Occured" });
+  }
+};
+// --end--
+
+
+
+
+
+
 // --I have commented the below codes, as it will keep on adding the same data to the database--
 // async function insertDummyCategoryData() {
 //   try {
