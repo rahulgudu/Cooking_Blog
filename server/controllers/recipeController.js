@@ -69,6 +69,21 @@ exports.exploreCategoriesById = async (req, res) => {
 };
 // --end--
 
+// --post /search--
+exports.searchRecipe = async (req, res) =>{
+  //searchTerm
+  try {
+    let searchTerm = req.body.searchTerm;
+    let recipe = await Recipe.find({ $text: { $search: searchTerm, $diacriticSensitive: true } });
+    // res.json(recipe); //this will give the output in json which is for testing purpose
+    res.render('search', { title: "Cooking Blog - Search", recipe });
+  } catch (error) {
+    res.status(500).send({ message: error.message || "Error Occured" });
+  }
+
+  res.render("search", {title: "Cooking Blog - Search"});
+}
+// --end--
 
 
 

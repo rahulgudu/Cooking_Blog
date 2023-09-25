@@ -28,4 +28,8 @@ const recipeSchema = new mongoose.Schema({
     },
 });
 
+//this is code i.e, required for implementing search feature
+recipeSchema.index({ name: 'text', description: 'text' });
+// --end--
+
 module.exports = mongoose.model("Recipe", recipeSchema);
