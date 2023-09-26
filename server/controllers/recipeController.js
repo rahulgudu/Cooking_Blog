@@ -111,6 +111,17 @@ exports.exploreRandom = async (req, res) =>{
 // --end--
 
 
+// --get /submit-recipe--
+exports.submitRecipe = async (req, res) => {
+  try {
+    res.render("submit-recipe", { title: "Cooking Blog - Submit Recipe" });
+  } catch (error) {
+    res.status(500).send({message: error.message || "Error Occured"});
+  }
+}
+// --end--
+
+
 
 // --I have commented the below codes, as it will keep on adding the same data to the database--
 // async function insertDummyCategoryData() {
