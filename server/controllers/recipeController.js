@@ -114,9 +114,51 @@ exports.exploreRandom = async (req, res) =>{
 // --get /submit-recipe--
 exports.submitRecipe = async (req, res) => {
   try {
-    res.render("submit-recipe", { title: "Cooking Blog - Submit Recipe" });
+    const infoErrorObj = req.flash("infoErrors");
+    const infoSubmitObj = req.flash("infoSubmit");
+    res.render("submit-recipe", { title: "Cooking Blog - Submit Recipe", infoErrorObj, infoSubmitObj });
   } catch (error) {
     res.status(500).send({message: error.message || "Error Occured"});
+  }
+}
+// --end--
+
+// --post /submit-recipe--
+exports.submitRecipeOnPost = async (req, res) => {
+  try {
+
+    let imageUploadFile;
+    let uploadPath;
+    let newImageName;
+
+    if(!req.files || Object.keys(req.files).length === 0){
+      console.log("No files were uploaded");
+    } else{
+      imageUploadFile = req.files.image;
+      newImageName = Date.now() + imageUploadFile.name;
+      uploadPath = require("path").resolve("./") + "/public/upload/" + newImageName;
+
+      imageUploadFile.mv(uploadPath, function(err){
+        if(err) return res.status(500).send(err);
+      })
+    }
+
+    const newRecipe = new Recipe({
+      name: req.body.name,
+      description: req.body.description,
+      email: req.body.email,
+      ingredients: req.body.ingredients,
+      category: req.body.category,
+      image: newImageName
+    });
+
+    await newRecipe.save();
+
+    req.flash("infoSubmit", "Recipe has been added.");
+    res.redirect("/submit-recipe");
+  } catch (error) {
+    req.flash("infoErrors", error);
+    res.redirect("/submit-recipe");
   }
 }
 // --end--
